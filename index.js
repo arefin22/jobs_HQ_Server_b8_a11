@@ -36,6 +36,8 @@ async function run() {
         // await client.connect();
 
         const jobCollection = client.db("JOBsHQ").collection('jobs');
+        const userCollection = client.db("JOBsHQ").collection('user');
+        const applyCollection = client.db("JOBsHQ").collection('applications');
 
 
         // auth releted api
@@ -48,6 +50,10 @@ async function run() {
 
 
         // service Releted api
+
+
+
+        // jobs Collection Starts
 
         app.get('/jobs', async (req, res) => {
             const result = await jobCollection.find().toArray();
@@ -108,8 +114,38 @@ async function run() {
             res.send(result);
         })
 
+        // Job Collection Finised
 
 
+        // User Collection Starts Here
+
+        app.get('/user', async(req, res) => {
+            const result = await userCollection.find().toArray();
+            res.send(result)
+        })
+
+        app.post('/user', async(req, res) => {
+            const user = req.body;
+            console.log(user);
+            const result = await userCollection.insertOne(user);
+            res.send(result);
+        })
+
+        // user Collection Finishes Here
+
+
+        // apply Collection Start Here
+        app.get('/applications', async(req, res) => {
+            const result = await applyCollection.find().toArray();
+            res.send(result)
+        })
+
+        app.post('/applications', async(req, res) => {
+            const application = req.body;
+            console.log(application);
+            const result = await applyCollection.insertOne(application);
+            res.send(result)
+        })
 
 
 
