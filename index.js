@@ -19,8 +19,7 @@ app.use(express.json())
 
 
 
-// const uri = `mongodb+srv://${process.env.USER_DB}:${process.env.PASS_DB}@cluster0.m25rjlj.mongodb.net/?retryWrites=true&w=majority`;
-const uri = `mongodb+srv://${process.env.USER_DB}:${process.env.PASS_DB}@cluster0.m25rjlj.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.USER_DB}:${process.env.PASS_DB}@cluster0.pt1xadb.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -131,8 +130,6 @@ async function run() {
             const result = await userCollection.insertOne(user);
             res.send(result);
         })
-
-        // Connections % of configured limit has gone above 80
 
         // user Collection Finishes Here
 
