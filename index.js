@@ -59,10 +59,21 @@ async function run() {
             const result = await jobCollection.find().toArray();
             res.send(result)
         })
+        
+
+        app.get('/jobs', async (req, res) => {
+            console.log(req.query.userEmail);
+            let query = {}
+            if(req.query?.userEmail){
+                query = {userEmail:req.query.userEmail}
+            }
+            const result = await jobCollection.find().toArray();
+            res.send(result)
+        })
 
         app.post('/jobs', async (req, res) => {
             const job = req.body;
-            console.log(job);
+            // console.log(job);
             const result = await jobCollection.insertOne(job);
             res.send(result);
         })
@@ -114,17 +125,19 @@ async function run() {
             res.send(result);
         })
 
+
+
         // Job Collection Finised
 
 
         // User Collection Starts Here
 
-        app.get('/user', async(req, res) => {
+        app.get('/user', async (req, res) => {
             const result = await userCollection.find().toArray();
             res.send(result)
         })
 
-        app.post('/user', async(req, res) => {
+        app.post('/user', async (req, res) => {
             const user = req.body;
             console.log(user);
             const result = await userCollection.insertOne(user);
@@ -137,17 +150,17 @@ async function run() {
 
 
         // apply Collection Start Here
-        app.get('/applications', async(req, res) => {
+        app.get('/applications', async (req, res) => {
             console.log(req.query.email);
             let query = {}
-            if(req.query?.email){
-                query = {email:req.query.email}
+            if (req.query?.email) {
+                query = { email: req.query.email }
             }
             const result = await applyCollection.find(query).toArray();
             res.send(result)
         })
 
-        app.post('/applications', async(req, res) => {
+        app.post('/applications', async (req, res) => {
             const application = req.body;
             console.log(application);
             const result = await applyCollection.insertOne(application);
